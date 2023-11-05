@@ -1,0 +1,56 @@
+import java.util.*;
+
+public class Java {
+    public static void main(String[] args) {
+        System.out.println("               STUDENT GRADE CALCULATOR ");
+        int h;
+        int s;
+        int ss;
+        int m;
+        int e;
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("ENTER YOUR MARKS IN HINDI");
+        h = sc.nextInt();
+        System.out.println("ENTER YOUR MARKS IN ENGLISH");
+        e = sc.nextInt();
+        System.out.println("ENTER YOUR MARKS IN MATHS");
+        m = sc.nextInt();
+        System.out.println("ENTER YOUR MARKS IN SOCIAL SCIENCE");
+        ss = sc.nextInt();
+        System.out.println("ENTER YOUR MARKS IN SCIENCE");
+        s = sc.nextInt();
+        
+        int sum = s + ss + e + m + h;
+        System.out.println("YOU HAVE SCORED TOTAL OF " + sum + " OUT OF 500");
+        
+        int percentage = (sum * 100) / 500;
+        System.out.println("YOU HAVE SCORED " + percentage + "%");
+        
+        String grade;
+        
+        if (percentage >= 90) {
+            grade = "A+";
+        } else if (percentage >= 80) {
+            grade = "A";
+        } else if (percentage >= 70) {
+            grade = "B+";
+        } else if (percentage >= 60) {
+            grade = "B";
+        } else if (percentage >= 50) {
+            grade = "C+";
+        } else if (percentage >= 40) {
+            grade = "C";
+        } else {
+            grade = "F";
+        }
+        
+        System.out.println("YOUR FINAL REPORT CARD IS");
+        System.out.println("");
+        System.out.println("YOU HAVE SCORED TOTAL OF " + sum + " OUT OF 500");
+        System.out.println("");
+        System.out.println("YOU HAVE SCORED " + percentage + "%");
+        System.out.println("");
+        System.out.println("YOUR GRADE IS: " + grade);
+    }
+}
