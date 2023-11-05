@@ -1,0 +1,27 @@
+import java.util.*;
+import java.util.Random;
+
+public class Java {
+    public static void main(String[] args) {
+        int guess;
+        Random rand = new Random();
+        guess = rand.nextInt(100) + 1;
+
+        int num;
+        Scanner sc = new Scanner(System.in);
+        System.out.print("GUESS THE NUMBER (between 1 and 100): ");
+        num = sc.nextInt();
+
+        while (guess != num) {
+            if (num < guess) {
+                System.out.println("Too low, try again.");
+            } else if (num > guess) {
+                System.out.println("Too high, try again.");
+            }
+
+            num = sc.nextInt();
+        }
+
+        System.out.println("Congratulations! You guessed the number " + guess + " correctly. Thanks for playing!");
+    }
+}
