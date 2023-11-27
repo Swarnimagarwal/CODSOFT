@@ -1,0 +1,83 @@
+import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
+
+public class SimpleQuizApp {
+    private static final int QUIZ_DURATION_SECONDS = 30;
+    private static final int QUESTION_COUNT = 5;
+    private static int currentQuestion = 0;
+    private static int score = 0;
+    private static Timer timer;
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        timer = new Timer();
+        timer.schedule(new QuizTimerTask(), 0, 1000);
+
+        String[] questions = {
+                "What's the capital of France?",
+                "Which planet is called the Red Planet?",
+                "What's the biggest mammal on Earth?",
+                "Who wrote 'Romeo and Juliet'?",
+                "What's the square root of 64?"
+        };
+
+        String[][] options = {
+                {"Paris", "Berlin", "London", "Madrid"},
+                {"Venus", "Mars", "Jupiter", "Saturn"},
+                {"Elephant", "Blue Whale", "Giraffe", "Hippopotamus"},
+                {"William Shakespeare", "Jane Austen", "Charles Dickens", "Emily Bronte"},
+                {"6", "8", "10", "12"}
+        };
+
+        for (int i = 0; i < QUESTION_COUNT; i++) {
+            askQuestion(questions[i], options[i]);
+            String userAnswer = scanner.nextLine();
+            checkAnswer(userAnswer, i);
+        }
+
+        System.out.println("Quiz done! Your score: " + score);
+
+        timer.cancel();
+    }
+
+    private static void askQuestion(String question, String[] options) {
+        System.out.println("\n" + question);
+        for (int i = 0; i < options.length; i++) {
+            System.out.println((i + 1) + ". " + options[i]);
+        }
+        System.out.print("Your answer: ");
+    }
+
+    private static void checkAnswer(String userAnswer, int questionIndex) {
+        String correctAnswer = getCorrectAnswer(questionIndex);
+        if (userAnswer.equalsIgnoreCase(correctAnswer)) {
+            System.out.println("Correct! +1 point");
+            score++;
+        } else {
+            System.out.println("Incorrect. Correct answer: " + correctAnswer);
+        }
+    }
+
+    private static String getCorrectAnswer(int questionIndex) {
+        String[] correctAnswers = {"Paris", "Mars", "Blue Whale", "William Shakespeare", "8"};
+        return correctAnswers[questionIndex];
+    }
+
+    private static class QuizTimerTask extends TimerTask {
+        private int secondsLeft = QUIZ_DURATION_SECONDS;
+
+        @Override
+        public void run() {
+            System.out.println("Time left: " + secondsLeft + " seconds");
+            if (secondsLeft == 0) {
+                System.out.println("Time's up! Quiz over.");
+                System.out.println("Your final score: " + score);
+                timer.cancel();
+                System.exit(0);
+            }
+            secondsLeft--;
+        }
+    }
+}
